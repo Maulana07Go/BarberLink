@@ -1,0 +1,46 @@
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role
+  bookings  Booking[]
+  reviews   Review[]
+  createdAt DateTime @default(now())
+}
+
+model Booking {
+  id         String   @id @default(uuid())
+  customer   User     @relation(fields: [customerId], references: [id])
+  customerId String
+  provider   User     @relation(fields: [providerId], references: [id])
+  providerId String
+  startTime  DateTime
+  endTime    DateTime
+  status     BookingStatus
+  createdAt  DateTime @default(now())
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  customer   User     @relation(fields: [customerId], references: [id])
+  customerId String
+  provider   User     @relation(fields: [providerId], references: [id])
+  providerId String
+  rating     Int
+  comment    String
+  createdAt  DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+  PROVIDER
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
