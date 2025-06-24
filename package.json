@@ -2,7 +2,7 @@
   "name": "barberlink",
   "private": true,
   "workspaces": [
-    "apps/frontend",
+    
     "apps/backend"
   ],
   "version": "1.0.0",
